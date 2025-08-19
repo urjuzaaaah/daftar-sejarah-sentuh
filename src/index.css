@@ -2,41 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Islamic History App Design System
+Dark elegant theme with gold accents inspired by Islamic architecture
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme base colors */
+    --background: 220 27% 8%;
+    --foreground: 45 100% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 27% 10%;
+    --card-foreground: 45 100% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 27% 12%;
+    --popover-foreground: 45 100% 90%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Islamic gold primary palette */
+    --primary: 45 100% 70%;
+    --primary-foreground: 220 27% 8%;
+    --primary-glow: 45 100% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 45 100% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 45 20% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 80% 60%;
+    --accent-foreground: 220 27% 8%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 100% 90%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 20% 20%;
+    --input: 220 20% 15%;
+    --ring: 45 100% 70%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Islamic themed gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 70%), hsl(35 100% 65%));
+    --gradient-night: linear-gradient(180deg, hsl(220 27% 8%), hsl(220 30% 12%));
+    --gradient-dome: linear-gradient(135deg, hsl(220 27% 12%), hsl(220 20% 18%));
+    
+    /* Sacred geometry inspired shadows */
+    --shadow-gold: 0 10px 30px -10px hsl(45 100% 70% / 0.3);
+    --shadow-dome: 0 20px 50px -20px hsl(220 27% 8% / 0.8);
+    --shadow-elegant: 0 4px 20px hsl(220 27% 8% / 0.5);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Font definitions */
+    --font-arabic: 'Amiri', serif;
+    --font-elegant: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +123,75 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    background: var(--gradient-night);
+    min-height: 100vh;
+  }
+
+  /* Islamic inspired animations */
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+    transition: var(--transition-smooth);
+  }
+
+  .glow-gold:hover {
+    box-shadow: 0 15px 40px -15px hsl(45 100% 70% / 0.5);
+    transform: translateY(-2px);
+  }
+
+  .pulse-gold {
+    animation: pulse-gold 2s infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 hsl(45 100% 70% / 0.7);
+    }
+    50% { 
+      box-shadow: 0 0 0 10px hsl(45 100% 70% / 0);
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(45deg, transparent 30%, hsl(45 100% 70% / 0.3) 50%, transparent 70%);
+    background-size: 200% 200%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 200%; }
+    100% { background-position: -200% -200%; }
+  }
+
+  .parallax-scroll {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Smooth scroll behavior */
+  .carousel-container {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Typography classes */
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
+
+  .font-elegant {
+    font-family: var(--font-elegant);
+  }
+
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
