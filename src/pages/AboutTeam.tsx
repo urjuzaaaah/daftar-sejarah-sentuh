@@ -130,14 +130,14 @@ const AboutTeam = () => {
           return (
             <Card 
               key={member.name}
-              className="transition-all duration-500 hover:scale-[1.02] hover:shadow-xl animate-fade-in"
+              className="card-hover animate-fade-in"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   {/* Avatar */}
                   <div className="relative">
-                    <div className={`w-16 h-16 ${member.color} rounded-xl flex items-center justify-center text-white font-bold text-xl animate-pulse-gentle`}>
+                    <div className={`w-16 h-16 ${member.color} rounded-xl flex items-center justify-center text-white font-bold text-xl animate-float`}>
                       {member.avatar}
                     </div>
                     <div className="absolute -bottom-2 -right-2 p-1 bg-background rounded-full border-2 border-border">

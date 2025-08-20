@@ -120,9 +120,9 @@ const Timeline = () => {
           return (
             <Card 
               key={event.year}
-              className={`transition-all duration-500 transform hover:scale-[1.02] animate-fade-in ${
+              className={`card-hover animate-fade-in ${
                 isSelected 
-                  ? "border-primary shadow-xl shadow-primary/20 bg-card" 
+                  ? "border-primary shadow-xl shadow-primary/20 bg-card animate-glow" 
                   : "border-border opacity-60 hover:opacity-100"
               }`}
               style={{ animationDelay: `${index * 0.15}s` }}
@@ -131,7 +131,7 @@ const Timeline = () => {
                 <div className="flex items-start gap-4">
                   {/* Icon */}
                   <div className={`p-3 rounded-xl transition-all duration-300 ${
-                    isSelected ? "bg-primary/20 scale-110" : "bg-secondary/50"
+                    isSelected ? "bg-primary/20 scale-110 animate-pulse-gentle" : "bg-secondary/50 hover:animate-wiggle"
                   }`}>
                     <IconComponent 
                       className={`h-6 w-6 transition-colors duration-300 ${

@@ -195,33 +195,59 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
   }
 
-  /* Micro animations */
-  .animate-bounce-subtle {
-    animation: bounce-subtle 2s infinite;
+  /* Interactive Elements */
+  .story-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
   
-  .animate-pulse-gentle {
-    animation: pulse-gentle 3s infinite;
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
   }
   
-  @keyframes bounce-subtle {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-2px);
-    }
-    60% {
-      transform: translateY(-1px);
-    }
+  .pulse-gold {
+    @apply animate-pulse;
+    animation-duration: 2s;
   }
   
-  @keyframes pulse-gentle {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+  
+  .animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Advanced Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1;
+  }
+  
+  .button-magnetic {
+    @apply transition-all duration-200 ease-out hover:shadow-lg hover:shadow-primary/25 transform-gpu;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
   }
 }

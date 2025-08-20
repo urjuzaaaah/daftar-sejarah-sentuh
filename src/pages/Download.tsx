@@ -154,13 +154,13 @@ const Download = () => {
           return (
             <Card 
               key={item.id}
-              className="transition-all duration-300 hover:scale-[1.02] hover:shadow-lg animate-fade-in border border-border/50 hover:border-primary/30"
+              className="card-hover animate-fade-in border border-border/50 hover:border-primary/30"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   {/* Icon */}
-                  <div className="p-3 rounded-xl bg-primary/10 animate-pulse-gentle">
+                  <div className="p-3 rounded-xl bg-primary/10 animate-float">
                     <IconComponent className="h-6 w-6 text-primary" />
                   </div>
 
@@ -201,9 +201,9 @@ const Download = () => {
                     <Button
                       onClick={() => handleDownload(item.id)}
                       disabled={isDownloading}
-                      className={`w-full transition-all duration-300 ${
+                      className={`w-full button-magnetic ${
                         isComplete 
-                          ? "bg-emerald-500 hover:bg-emerald-600" 
+                          ? "bg-emerald-500 hover:bg-emerald-600 animate-pulse-gentle" 
                           : isDownloading 
                           ? "opacity-50 cursor-not-allowed" 
                           : "hover:scale-105"

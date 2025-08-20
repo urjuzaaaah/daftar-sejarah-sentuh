@@ -154,7 +154,7 @@ const Setting = () => {
         <Card className="animate-fade-in border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
           <CardContent className="p-6">
             <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto animate-pulse-gentle">
+              <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto animate-float text-glow">
                 <span className="text-2xl">🕌</span>
               </div>
               <div>
@@ -216,7 +216,7 @@ const Setting = () => {
                         <Switch 
                           checked={settings[item.key as keyof typeof settings] as boolean}
                           onCheckedChange={() => handleSettingChange(item.key)}
-                          className="animate-pulse-gentle"
+                          className="hover:animate-wiggle"
                         />
                       </div>
                       {itemIndex < group.items.length - 1 && <Separator />}
@@ -248,7 +248,7 @@ const Setting = () => {
                 <div key={item.label} className="space-y-3">
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start h-auto p-4 hover:scale-[1.02] transition-all duration-300 ${
+                    className={`w-full justify-start h-auto p-4 button-magnetic ${
                       item.dangerous ? 'hover:bg-destructive/10 hover:text-destructive' : ''
                     }`}
                     onClick={item.action}
