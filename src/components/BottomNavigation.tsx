@@ -22,18 +22,16 @@ const BottomNavigation = () => {
           <button
             key={tab.id}
             onClick={() => navigate(tab.path)}
-            className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-300 transform button-magnetic ${
+            className={`flex flex-col items-center gap-1 p-3 rounded-xl ${
               activeTab === tab.id
-                ? "text-primary scale-110 bg-primary/20 animate-glow"
-                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 hover:scale-105 hover:animate-pulse-gentle"
+                ? "text-primary bg-primary/20"
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
             }`}
           >
-            <tab.icon className={`h-5 w-5 transition-transform duration-300 ${
-              activeTab === tab.id ? "scale-110 animate-float" : "hover:animate-wiggle"
-            }`} />
+            <tab.icon className="h-5 w-5" />
             <span className="text-xs font-medium">{tab.label}</span>
             {activeTab === tab.id && (
-              <div className="w-1 h-1 bg-primary rounded-full animate-heartbeat"></div>
+              <div className="w-1 h-1 bg-primary rounded-full"></div>
             )}
           </button>
         ))}
