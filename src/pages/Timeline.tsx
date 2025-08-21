@@ -3,9 +3,12 @@ import { Calendar, MapPin, Users, Crown, Sword, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
+import EventDetail from "@/components/EventDetail";
 
 const Timeline = () => {
   const [selectedYear, setSelectedYear] = useState(610);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showEventDetail, setShowEventDetail] = useState(false);
 
   const timelineEvents = [
     {
@@ -76,6 +79,11 @@ const Timeline = () => {
     return colors[category as keyof typeof colors] || "bg-secondary/20 text-secondary-foreground";
   };
 
+  const handleEventClick = (event: any) => {
+    setSelectedEvent(event);
+    setShowEventDetail(true);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
       {/* Header */}
@@ -120,12 +128,13 @@ const Timeline = () => {
           return (
             <Card 
               key={event.year}
-              className={`card-hover animate-fade-in ${
+              className={`card-hover animate-fade-in cursor-pointer ${
                 isSelected 
                   ? "border-primary shadow-xl shadow-primary/20 bg-card animate-glow" 
                   : "border-border opacity-60 hover:opacity-100"
               }`}
               style={{ animationDelay: `${index * 0.15}s` }}
+              onClick={() => handleEventClick(event)}
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -179,6 +188,12 @@ const Timeline = () => {
           );
         })}
       </div>
+
+      <EventDetail 
+        isOpen={showEventDetail}
+        onClose={() => setShowEventDetail(false)}
+        event={selectedEvent}
+      />
 
       <BottomNavigation />
     </div>
