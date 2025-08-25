@@ -13,6 +13,8 @@ const Timeline = () => {
   const timelineEvents = [
     {
       year: 570,
+      hijriYear: "53 Sebelum Hijriyah",
+      hijriSort: -53,
       title: "Kelahiran Nabi Muhammad SAW",
       description: "Tahun Gajah - Kelahiran sang pembawa rahmat bagi semesta alam",
       location: "Makkah",
@@ -22,6 +24,8 @@ const Timeline = () => {
     },
     {
       year: 610,
+      hijriYear: "13 Sebelum Hijriyah",
+      hijriSort: -13,
       title: "Wahyu Pertama",
       description: "Turunnya wahyu pertama di Gua Hira",
       location: "Gua Hira, Makkah",
@@ -31,6 +35,8 @@ const Timeline = () => {
     },
     {
       year: 622,
+      hijriYear: "1 H",
+      hijriSort: 1,
       title: "Hijrah ke Madinah",
       description: "Perpindahan bersejarah dari Makkah ke Madinah",
       location: "Makkah - Madinah",
@@ -40,6 +46,8 @@ const Timeline = () => {
     },
     {
       year: 624,
+      hijriYear: "2 H",
+      hijriSort: 2,
       title: "Perang Badr",
       description: "Kemenangan pertama kaum Muslim",
       location: "Badr",
@@ -49,6 +57,8 @@ const Timeline = () => {
     },
     {
       year: 630,
+      hijriYear: "8 H",
+      hijriSort: 8,
       title: "Fathu Makkah",
       description: "Pembebasan Makkah tanpa pertumpahan darah",
       location: "Makkah",
@@ -58,6 +68,8 @@ const Timeline = () => {
     },
     {
       year: 632,
+      hijriYear: "11 H",
+      hijriSort: 11,
       title: "Wafat Rasulullah SAW",
       description: "Kepergian sang teladan terbaik umat manusia",
       location: "Madinah",
@@ -65,7 +77,7 @@ const Timeline = () => {
       category: "death",
       details: "Hari Senin, 12 Rabiul Awal tahun 11 Hijriah"
     }
-  ];
+  ].sort((a, b) => a.hijriSort - b.hijriSort);
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -156,7 +168,7 @@ const Timeline = () => {
                         variant="outline" 
                         className={`${getCategoryColor(event.category)} animate-pulse-gentle`}
                       >
-                        {event.year} M
+                        {event.hijriYear}
                       </Badge>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <MapPin className="h-3 w-3" />
