@@ -1,20 +1,33 @@
 import { useState } from "react";
-import { Calendar, MapPin, Users, Crown, Sword, Heart, Book, Home, Baby, Star, Shield, Scroll } from "lucide-react";
+import { Calendar, MapPin, Users, Crown, Sword, Heart, Book, Home, Baby, Star, Shield, Scroll, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import BottomNavigation from "@/components/BottomNavigation";
 import EventDetail from "@/components/EventDetail";
 
+// Import images
+import birth570 from "@/assets/birth-570.jpg";
+import revelation610 from "@/assets/revelation-610.jpg";
+import hijrah1h from "@/assets/hijrah-1h.jpg";
+import badr2h from "@/assets/badr-2h.jpg";
+import fathu8h from "@/assets/fathu-8h.jpg";
+import wafat11h from "@/assets/wafat-11h.jpg";
+
 const Timeline = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState("sebelum-hijriyah");
+  const [selectedYear, setSelectedYear] = useState("570");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showEventDetail, setShowEventDetail] = useState(false);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-  const timelineData = {
-    "sebelum-hijriyah": {
-      title: "Sebelum Hijriyah",
-      subtitle: "Periode Makkah",
+  const yearCards = [
+    {
+      id: "570",
+      title: "570 M",
+      hijriYear: "53 Sebelum Hijriyah",
+      subtitle: "Kelahiran Nabi Muhammad SAW",
+      image: birth570,
+      mainEvent: "Tahun Gajah",
       events: [
         {
           year: 570,
@@ -25,47 +38,17 @@ const Timeline = () => {
           icon: Baby,
           category: "birth",
           details: "Nabi Muhammad SAW lahir pada hari Senin, 12 Rabiul Awal di tahun Gajah"
-        },
-        {
-          year: 576,
-          hijriYear: "47 Sebelum Hijriyah",
-          title: "Wafat Ibunda Aminah",
-          description: "Kematian ibunda tercinta saat Muhammad berusia 6 tahun",
-          location: "Abwa, antara Makkah dan Madinah",
-          icon: Heart,
-          category: "family",
-          details: "Aminah wafat dalam perjalanan mengunjungi keluarga di Madinah"
-        },
-        {
-          year: 578,
-          hijriYear: "45 Sebelum Hijriyah",
-          title: "Wafat Kakek Abdul Muthallib",
-          description: "Wafatnya kakek yang sangat menyayanginya",
-          location: "Makkah",
-          icon: Heart,
-          category: "family",
-          details: "Muhammad kemudian diasuh oleh pamannya Abu Thalib"
-        },
-        {
-          year: 583,
-          hijriYear: "40 Sebelum Hijriyah",
-          title: "Perjalanan Dagang Pertama ke Syria",
-          description: "Ikut berdagang dengan pamannya Abu Thalib ke Syria",
-          location: "Makkah - Syria",
-          icon: Home,
-          category: "journey",
-          details: "Dalam perjalanan ini, Bahira rahib mengenali tanda-tanda kenabian"
-        },
-        {
-          year: 595,
-          hijriYear: "28 Sebelum Hijriyah",
-          title: "Pernikahan dengan Khadijah RA",
-          description: "Menikah dengan Sayyidah Khadijah binti Khuwailid",
-          location: "Makkah",
-          icon: Heart,
-          category: "marriage",
-          details: "Khadijah adalah istri pertama dan penyokong utama dakwah awal"
-        },
+        }
+      ]
+    },
+    {
+      id: "610",
+      title: "610 M",
+      hijriYear: "13 Sebelum Hijriyah",
+      subtitle: "Wahyu Pertama",
+      image: revelation610,
+      mainEvent: "Turunnya Al-Alaq",
+      events: [
         {
           year: 610,
           hijriYear: "13 Sebelum Hijriyah",
@@ -75,52 +58,16 @@ const Timeline = () => {
           icon: Crown,
           category: "revelation",
           details: "Dimulainya misi kenabian dengan turunnya Surah Al-Alaq ayat 1-5"
-        },
-        {
-          year: 613,
-          hijriYear: "10 Sebelum Hijriyah",
-          title: "Dakwah Terbuka",
-          description: "Mulai berdakwah secara terbuka kepada masyarakat Makkah",
-          location: "Makkah",
-          icon: Book,
-          category: "dawah",
-          details: "Dakwah yang awalnya rahasia mulai dilakukan secara terbuka"
-        },
-        {
-          year: 615,
-          hijriYear: "8 Sebelum Hijriyah",
-          title: "Hijrah ke Habasyah",
-          description: "Sebagian sahabat hijrah ke Habasyah untuk menghindari siksaan",
-          location: "Makkah - Habasyah",
-          icon: Shield,
-          category: "hijrah",
-          details: "Hijrah pertama untuk melindungi kaum Muslim dari siksaan Quraisy"
-        },
-        {
-          year: 619,
-          hijriYear: "4 Sebelum Hijriyah",
-          title: "Aamul Huzn (Tahun Dukacita)",
-          description: "Wafat Khadijah RA dan Abu Thalib dalam tahun yang sama",
-          location: "Makkah",
-          icon: Heart,
-          category: "family",
-          details: "Kehilangan dua orang terdekat yang sangat mendukung dakwah"
-        },
-        {
-          year: 620,
-          hijriYear: "3 Sebelum Hijriyah",
-          title: "Isra Mi'raj",
-          description: "Perjalanan malam dari Masjidil Haram ke Masjidil Aqsha dan naik ke Sidratul Muntaha",
-          location: "Makkah - Jerusalem - Langit",
-          icon: Star,
-          category: "miracle",
-          details: "Mukjizat besar berupa perjalanan fisik dan spiritual dalam satu malam"
         }
       ]
     },
-    "periode-madinah": {
-      title: "1-11 Hijriyah",
-      subtitle: "Periode Madinah",
+    {
+      id: "1h",
+      title: "1 H",
+      hijriYear: "1 Hijriyah",
+      subtitle: "Hijrah ke Madinah",
+      image: hijrah1h,
+      mainEvent: "Awal Peradaban Islam",
       events: [
         {
           year: 622,
@@ -141,7 +88,17 @@ const Timeline = () => {
           icon: Home,
           category: "building",
           details: "Masjid yang juga berfungsi sebagai tempat tinggal dan pusat aktivitas"
-        },
+        }
+      ]
+    },
+    {
+      id: "2h",
+      title: "2 H",
+      hijriYear: "2 Hijriyah",
+      subtitle: "Perang Badr",
+      image: badr2h,
+      mainEvent: "Kemenangan Pertama",
+      events: [
         {
           year: 623,
           hijriYear: "2 H",
@@ -161,47 +118,17 @@ const Timeline = () => {
           icon: Sword,
           category: "battle",
           details: "313 Muslim mengalahkan 1000 pasukan Quraisy dengan pertolongan Allah"
-        },
-        {
-          year: 625,
-          hijriYear: "3 H",
-          title: "Perang Uhud",
-          description: "Pelajaran penting tentang ketaatan dan disiplin dalam berperang",
-          location: "Uhud, Madinah",
-          icon: Sword,
-          category: "battle",
-          details: "Kekalahan sementara akibat melanggar instruksi, namun memberikan pelajaran berharga"
-        },
-        {
-          year: 627,
-          hijriYear: "5 H",
-          title: "Perang Khandaq (Ahzab)",
-          description: "Pertahanan Madinah dengan strategi parit dari koalisi suku Arab",
-          location: "Madinah",
-          icon: Shield,
-          category: "battle",
-          details: "Strategi parit dari Salman Al-Farisi yang menyelamatkan Madinah"
-        },
-        {
-          year: 628,
-          hijriYear: "6 H",
-          title: "Perjanjian Hudaibiyah",
-          description: "Perjanjian damai yang membuka jalan untuk penyebaran Islam",
-          location: "Hudaibiyah",
-          icon: Scroll,
-          category: "politics",
-          details: "Perjanjian yang awalnya tampak merugikan namun membawa kemenangan besar"
-        },
-        {
-          year: 629,
-          hijriYear: "7 H",
-          title: "Perang Khaibar",
-          description: "Pembebasan benteng Khaibar dari Yahudi yang berkhianat",
-          location: "Khaibar",
-          icon: Sword,
-          category: "battle",
-          details: "Kemenangan yang memperkuat posisi Islam di Jazirah Arab"
-        },
+        }
+      ]
+    },
+    {
+      id: "8h",
+      title: "8 H",
+      hijriYear: "8 Hijriyah",
+      subtitle: "Fathu Makkah",
+      image: fathu8h,
+      mainEvent: "Penaklukan Damai",
+      events: [
         {
           year: 630,
           hijriYear: "8 H",
@@ -221,17 +148,17 @@ const Timeline = () => {
           icon: Sword,
           category: "battle",
           details: "Perang setelah Fathu Makkah yang menunjukkan kekuatan Islam"
-        },
-        {
-          year: 631,
-          hijriYear: "9 H",
-          title: "Tahun Wufud (Delegasi)",
-          description: "Berbagai delegasi suku Arab datang untuk masuk Islam",
-          location: "Madinah",
-          icon: Users,
-          category: "dawah",
-          details: "Tahun dimana delegasi dari seluruh Jazirah Arab datang menyatakan keislaman"
-        },
+        }
+      ]
+    },
+    {
+      id: "11h",
+      title: "11 H",
+      hijriYear: "11 Hijriyah",
+      subtitle: "Wafat Rasulullah SAW",
+      image: wafat11h,
+      mainEvent: "Kepergian Sang Rasul",
+      events: [
         {
           year: 632,
           hijriYear: "10 H",
@@ -254,7 +181,7 @@ const Timeline = () => {
         }
       ]
     }
-  };
+  ];
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -281,6 +208,16 @@ const Timeline = () => {
     setShowEventDetail(true);
   };
 
+  const nextCard = () => {
+    setCurrentCardIndex((prev) => (prev + 1) % yearCards.length);
+  };
+
+  const prevCard = () => {
+    setCurrentCardIndex((prev) => (prev - 1 + yearCards.length) % yearCards.length);
+  };
+
+  const selectedYearData = yearCards.find(card => card.id === selectedYear) || yearCards[0];
+
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
       {/* Header */}
@@ -295,86 +232,146 @@ const Timeline = () => {
         </div>
       </div>
 
-      {/* Period Selection */}
+      {/* Year Carousel */}
       <div className="p-6">
-        <Tabs value={selectedPeriod} onValueChange={setSelectedPeriod} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="sebelum-hijriyah" className="text-sm">
-              Sebelum Hijriyah
-            </TabsTrigger>
-            <TabsTrigger value="periode-madinah" className="text-sm">
-              1-11 Hijriyah
-            </TabsTrigger>
-          </TabsList>
+        <div className="relative">
+          {/* Carousel Controls */}
+          <div className="flex items-center justify-between mb-4">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prevCard}
+              className="h-10 w-10"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            
+            <h2 className="text-lg font-semibold text-center">
+              Pilih Tahun Hijriyah
+            </h2>
+            
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextCard}
+              className="h-10 w-10"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
 
-          {Object.entries(timelineData).map(([periodKey, periodData]) => (
-            <TabsContent key={periodKey} value={periodKey} className="space-y-6">
-              {/* Period Header */}
-              <Card className="border-primary/20 bg-primary/5">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-center">
-                    <Badge variant="outline" className="bg-primary/20 text-primary border-primary/30 mb-2">
-                      {periodData.title}
-                    </Badge>
-                    <h2 className="text-2xl font-bold text-primary mt-2">{periodData.subtitle}</h2>
-                  </CardTitle>
-                </CardHeader>
-              </Card>
+          {/* Carousel Cards */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out gap-4"
+              style={{ transform: `translateX(-${currentCardIndex * 320}px)` }}
+            >
+              {yearCards.map((card, index) => (
+                <Card
+                  key={card.id}
+                  className={`flex-shrink-0 w-80 cursor-pointer transition-all duration-200 ${
+                    selectedYear === card.id
+                      ? "border-primary shadow-lg shadow-primary/20 scale-105"
+                      : "border-border hover:border-primary/50"
+                  }`}
+                  onClick={() => setSelectedYear(card.id)}
+                >
+                  <div className="relative">
+                    <img
+                      src={card.image}
+                      alt={card.subtitle}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                      style={{ filter: "sepia(20%) saturate(80%) hue-rotate(20deg)" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-lg" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <Badge variant="secondary" className="bg-white/20 text-white border-white/30 mb-2">
+                        {card.hijriYear}
+                      </Badge>
+                      <h3 className="text-xl font-bold">{card.subtitle}</h3>
+                      <p className="text-sm opacity-90">{card.mainEvent}</p>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <div className="text-center">
+                      <h4 className="font-semibold text-lg">{card.title}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {card.events.length} peristiwa
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
-              {/* Events */}
-              <div className="space-y-4">
-                {periodData.events.map((event, index) => {
-                  const IconComponent = event.icon;
-                  
-                  return (
-                    <Card 
-                      key={`${event.year}-${index}`}
-                      className="cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-primary/10 border-border hover:border-primary/30"
-                      onClick={() => handleEventClick(event)}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4">
-                          {/* Icon */}
-                          <div className="p-3 rounded-xl bg-secondary/50">
-                            <IconComponent className="h-6 w-6 text-muted-foreground" />
-                          </div>
+      {/* Selected Year Events */}
+      <div className="px-6 space-y-6">
+        <Card className="border-primary/20 bg-primary/5">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-center">
+              <Badge variant="outline" className="bg-primary/20 text-primary border-primary/30 mb-2">
+                {selectedYearData.hijriYear}
+              </Badge>
+              <h2 className="text-2xl font-bold text-primary mt-2">{selectedYearData.subtitle}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{selectedYearData.mainEvent}</p>
+            </CardTitle>
+          </CardHeader>
+        </Card>
 
-                          {/* Content */}
-                          <div className="flex-1 space-y-3">
-                            <div className="flex items-center gap-3 flex-wrap">
-                              <Badge 
-                                variant="outline" 
-                                className={getCategoryColor(event.category)}
-                              >
-                                {event.hijriYear}
-                              </Badge>
-                              <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                                <MapPin className="h-3 w-3" />
-                                {event.location}
-                              </div>
-                            </div>
+        {/* Events for Selected Year */}
+        <div className="space-y-4">
+          {selectedYearData.events.map((event, index) => {
+            const IconComponent = event.icon;
+            
+            return (
+              <Card 
+                key={`${event.year}-${index}`}
+                className="cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-primary/10 border-border hover:border-primary/30"
+                onClick={() => handleEventClick(event)}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    {/* Icon */}
+                    <div className="p-3 rounded-xl bg-secondary/50">
+                      <IconComponent className="h-6 w-6 text-muted-foreground" />
+                    </div>
 
-                            <div>
-                              <h3 className="text-xl font-bold text-foreground">
-                                {event.title}
-                              </h3>
-                              <p className="text-sm mt-1 text-muted-foreground">
-                                {event.description}
-                              </p>
-                              <p className="text-xs text-muted-foreground mt-2 opacity-80">
-                                {event.details}
-                              </p>
-                            </div>
-                          </div>
+                    {/* Content */}
+                    <div className="flex-1 space-y-3">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <Badge 
+                          variant="outline" 
+                          className={getCategoryColor(event.category)}
+                        >
+                          {event.hijriYear}
+                        </Badge>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <MapPin className="h-3 w-3" />
+                          {event.location}
                         </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground">
+                          {event.title}
+                        </h3>
+                        <p className="text-sm mt-1 text-muted-foreground">
+                          {event.description}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-2 opacity-80">
+                          {event.details}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </div>
 
       <EventDetail 
