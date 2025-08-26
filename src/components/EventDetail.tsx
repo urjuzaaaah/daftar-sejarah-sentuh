@@ -30,38 +30,132 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
     setTimeout(() => setIsSharing(false), 1000);
   };
 
-  const eventDetails = {
-    title: "Perang Khandaq (Ahzab)",
-    subtitle: "Keteguhan Iman di Tengah Kepungan",
-    location: "Madinah Al-Munawwarah",
-    duration: "1 bulan",
-    time: "Syawal 5 H",
-    participants: ["Muslimin", "Quraisy", "Ghathafan", "Banu Nadhir", "Yahudi"],
-    description: "Perang Khandaq atau Perang Ahzab merupakan salah satu peperangan besar yang dihadapi umat Islam pada masa Rasulullah SAW. Perang ini terjadi ketika koalisi besar suku-suku Arab bersatu untuk menyerang Madinah.",
-    funFacts: [
-      "Parit Khandaq digali sepanjang 5,5 km — strategi perang yang tak pernah digunakan sebelumnya oleh bangsa Arab.",
-      "Strategi ini berasal dari ide Salman Al-Farisi yang terinspirasi dari teknik perang Persia."
-    ],
-    strategies: [
-      "Penggalian parit sepanjang 5,5 km di sekitar Madinah",
-      "Penempatan pasukan di titik-titik strategis",
-      "Diplomasi untuk memecah koalisi musuh"
-    ],
-    references: [
-      {
-        title: "Sirah Nabawiyah",
-        author: "Ibnu Hisyam",
-        publisher: "Dar Al-Kutub Al-Ilmiyah",
-        volume: "Vol. 2, hal. 214–246"
-      },
-      {
-        title: "Al-Bidayah wan Nihayah",
-        author: "Ibnu Katsir",
-        publisher: "Dar Ihya Al-Turats",
-        volume: "Vol. 4, hal. 106–145"
-      }
-    ]
+  // Use dynamic content based on the event passed
+  const getEventDetails = (event: any) => {
+    const baseDetails = {
+      title: event?.title || "Detail Peristiwa",
+      subtitle: event?.description || "Deskripsi peristiwa",
+      location: "Makkah/Madinah",
+      duration: "Bervariasi",
+      time: "Masa Rasulullah ﷺ",
+      participants: ["Kaum Muslim"],
+      description: event?.description || "Peristiwa penting dalam sejarah Islam",
+      funFacts: [
+        "Peristiwa ini memiliki makna penting dalam sejarah Islam",
+        "Mengandung pelajaran berharga untuk umat Muslim"
+      ],
+      strategies: [
+        "Strategi yang diterapkan pada masa itu",
+        "Pendekatan yang bijaksana"
+      ],
+      references: [
+        {
+          title: "Sirah Nabawiyah",
+          author: "Ibnu Hisyam",
+          publisher: "Dar Al-Kutub Al-Ilmiyah",
+          volume: "Vol. 1-4"
+        },
+        {
+          title: "Al-Bidayah wan Nihayah",
+          author: "Ibnu Katsir", 
+          publisher: "Dar Ihya Al-Turats",
+          volume: "Vol. 1-14"
+        }
+      ]
+    };
+
+    // Customize details based on event type
+    if (event?.title?.includes("Perang Badr")) {
+      return {
+        ...baseDetails,
+        subtitle: "Kemenangan Pertama Kaum Muslim",
+        location: "Badr, Arab Saudi",
+        duration: "1 hari",
+        time: "17 Ramadhan 2 H",
+        participants: ["313 Muslim", "1000 Quraisy"],
+        funFacts: [
+          "313 Muslim mengalahkan 1000 tentara Quraisy",
+          "Pertama kali Malaikat turun membantu dalam peperangan"
+        ],
+        strategies: [
+          "Pemilihan lokasi strategis di sumur Badr",
+          "Formasi perang yang rapi dan disiplin tinggi"
+        ]
+      };
+    } else if (event?.title?.includes("Perang Uhud")) {
+      return {
+        ...baseDetails,
+        subtitle: "Ujian Ketaatan dan Kesabaran",
+        location: "Gunung Uhud, Madinah",
+        duration: "1 hari",
+        time: "Syawal 3 H",
+        participants: ["700 Muslim", "3000 Quraisy"],
+        funFacts: [
+          "Rasulullah ﷺ terluka dan gigi beliau patah",
+          "Hamzah bin Abdul Muthalib gugur sebagai syahid"
+        ],
+        strategies: [
+          "Penempatan pemanah di Gunung Uhud",
+          "Strategi bertahan di lereng gunung"
+        ]
+      };
+    } else if (event?.title?.includes("Perang Khandaq")) {
+      return {
+        ...baseDetails,
+        subtitle: "Keteguhan Iman di Tengah Kepungan",
+        location: "Madinah Al-Munawwarah",
+        duration: "27 hari",
+        time: "Syawal 5 H",
+        participants: ["3000 Muslim", "10000 Koalisi"],
+        funFacts: [
+          "Parit digali sepanjang 5,5 km di sekitar Madinah",
+          "Strategi ini berasal dari ide Salman Al-Farisi"
+        ],
+        strategies: [
+          "Penggalian parit sepanjang 5,5 km",
+          "Diplomasi untuk memecah koalisi musuh"
+        ]
+      };
+    } else if (event?.title?.includes("Fathu Makkah")) {
+      return {
+        ...baseDetails,
+        subtitle: "Penaklukan Tanpa Pertumpahan Darah",
+        location: "Makkah Al-Mukarramah",
+        duration: "3 hari",
+        time: "Ramadhan 8 H",
+        participants: ["10000 Muslim", "Penduduk Makkah"],
+        funFacts: [
+          "Penaklukan damai tanpa pertumpahan darah",
+          "Rasulullah ﷺ mengampuni seluruh penduduk Makkah"
+        ],
+        strategies: [
+          "Pendekatan dari empat arah secara bersamaan",
+          "Diplomasi dan pengampunan menyeluruh"
+        ]
+      };
+    } else if (event?.title?.includes("Hijrah")) {
+      return {
+        ...baseDetails,
+        subtitle: "Perpindahan Bersejarah",
+        location: "Makkah - Madinah",
+        duration: "8 hari",
+        time: "Rabiul Awwal 1 H",
+        participants: ["Rasulullah ﷺ", "Abu Bakar RA"],
+        funFacts: [
+          "Menjadi awal penanggalan Hijriyah",
+          "Bersembunyi di Gua Tsur selama 3 hari"
+        ],
+        strategies: [
+          "Rute rahasia melalui Gua Tsur",
+          "Persiapan matang dan kerahasiaan"
+        ]
+      };
+    }
+
+    return baseDetails;
   };
+
+  const eventDetails = getEventDetails(event);
 
   return (
     <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md animate-fade-in">
