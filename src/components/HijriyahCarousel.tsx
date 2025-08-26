@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, Moon, Swords, Heart, Users } from "lucide-react";
 
-const HijriyahCarousel = () => {
+interface HijriyahCarouselProps {
+  onEventClick?: (event: any) => void;
+}
+
+const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
   const [selectedYear, setSelectedYear] = useState("1445");
   
   const hijriYears = [
@@ -62,7 +66,11 @@ const HijriyahCarousel = () => {
       {/* Events List */}
       <div className="space-y-3">
         {events[selectedYear as keyof typeof events]?.map((event, index) => (
-          <Card key={index} className="p-4 bg-card hover:bg-secondary transition-all duration-300 glow-gold">
+          <Card 
+            key={index} 
+            className="p-4 bg-card hover:bg-secondary transition-all duration-300 glow-gold cursor-pointer"
+            onClick={() => onEventClick?.(event)}
+          >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                 <event.icon className="h-5 w-5 text-primary" />
