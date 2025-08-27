@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ChevronRight, Moon, Swords, Heart, Users } from "lucide-react";
+import { ChevronRight, ChevronLeft, Moon, Swords, Heart, Users } from "lucide-react";
 
 interface HijriyahCarouselProps {
   onEventClick?: (event: any) => void;
@@ -9,6 +9,8 @@ interface HijriyahCarouselProps {
 
 const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
   const [selectedYear, setSelectedYear] = useState("Sebelum Hijriyah");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   const hijriYears = [
     { year: "Sebelum Hijriyah", events: 8 },
@@ -89,6 +91,30 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
     ]
   };
 
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      const maxIndex = Math.max(0, hijriYears.length - 5);
+      const newIndex = Math.max(0, currentIndex - 1);
+      setCurrentIndex(newIndex);
+      carouselRef.current.scrollTo({
+        left: newIndex * 140,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      const maxIndex = Math.max(0, hijriYears.length - 5);
+      const newIndex = Math.min(maxIndex, currentIndex + 1);
+      setCurrentIndex(newIndex);
+      carouselRef.current.scrollTo({
+        left: newIndex * 140,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="px-4 mb-8">
       <div className="mb-6">
@@ -99,24 +125,56 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
       </div>
 
       {/* Year Carousel */}
-      <div className="carousel-container flex gap-3 overflow-x-auto pb-4 mb-6">
-        {hijriYears.map((item) => (
-          <Card
-            key={item.year}
-            className={`min-w-[120px] p-4 cursor-pointer transition-all duration-300 ${
-              selectedYear === item.year
-                ? "bg-primary text-primary-foreground glow-gold scale-105"
-                : "bg-card hover:bg-secondary"
-            }`}
-            onClick={() => setSelectedYear(item.year)}
+      <div className="relative">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center justify-between mb-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={scrollLeft}
+            disabled={currentIndex === 0}
+            className="rounded-full p-2 h-10 w-10 hover:bg-primary/10"
           >
-            <div className="text-center">
-              <Moon className="h-6 w-6 mx-auto mb-2" />
-              <div className="font-bold text-xs">{item.year}</div>
-              <div className="text-xs opacity-75">{item.events} peristiwa</div>
-            </div>
-          </Card>
-        ))}
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={scrollRight}
+            disabled={currentIndex >= Math.max(0, hijriYears.length - 5)}
+            className="rounded-full p-2 h-10 w-10 hover:bg-primary/10"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Carousel Container */}
+        <div 
+          ref={carouselRef}
+          className="flex gap-3 overflow-x-auto pb-4 mb-6 snap-x snap-mandatory scroll-smooth lg:overflow-hidden [&::-webkit-scrollbar]:hidden"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+        >
+          {hijriYears.map((item, index) => (
+            <Card
+              key={item.year}
+              className={`min-w-[120px] lg:min-w-[140px] p-4 cursor-pointer transition-all duration-300 snap-start hover-scale ${
+                selectedYear === item.year
+                  ? "bg-primary text-primary-foreground glow-gold scale-105"
+                  : "bg-card hover:bg-secondary"
+              } ${index >= currentIndex && index < currentIndex + 5 ? 'lg:block' : 'lg:hidden'}`}
+              onClick={() => setSelectedYear(item.year)}
+            >
+              <div className="text-center">
+                <Moon className="h-6 w-6 mx-auto mb-2" />
+                <div className="font-bold text-xs">{item.year}</div>
+                <div className="text-xs opacity-75">{item.events} peristiwa</div>
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {/* Events List */}
