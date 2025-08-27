@@ -4,7 +4,11 @@ import kaabaImage from "@/assets/kaaba.jpg";
 import masjidNabawiImage from "@/assets/masjid-nabawi.jpg";
 import manuscriptImage from "@/assets/manuscript.jpg";
 
-const FavoriteStories = () => {
+interface FavoriteStoriesProps {
+  onEventClick?: (event: any) => void;
+}
+
+const FavoriteStories = ({ onEventClick }: FavoriteStoriesProps) => {
   const stories = [
     {
       id: 1,
@@ -43,12 +47,13 @@ const FavoriteStories = () => {
         <div className="w-16 h-1 bg-primary rounded-full"></div>
       </div>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {stories.map((story, index) => (
           <Card 
             key={story.id}
             className="overflow-hidden bg-card cursor-pointer group hover:scale-[1.02] transition-all duration-500 glow-gold"
             style={{animationDelay: `${index * 0.1}s`}}
+            onClick={() => onEventClick?.(story)}
           >
             <div className="relative h-48 overflow-hidden">
               <img 

@@ -37,7 +37,7 @@ const Index = () => {
         <InteractiveQuiz />
         
         {/* Favorite Stories Section */}
-        <FavoriteStories />
+        <FavoriteStories onEventClick={handleEventClick} />
       </div>
       
       {/* Bottom Navigation */}
