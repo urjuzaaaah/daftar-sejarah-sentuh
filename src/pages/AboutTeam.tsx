@@ -2,59 +2,49 @@ import { Crown, Users, Heart, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
-
 const AboutTeam = () => {
   const teamData = {
     introduction: {
       bismillah: "بسم الله الرحمن الرحيم",
       content: "Segala puji bagi Allah, yang dengan cahaya ilmu-Nya sejarah terjaga dan dengan hikmah-Nya peradaban tumbuh. Shalawat dan salam tercurah kepada Nabi Muhammad ﷺ, sang pembawa risalah dan teladan agung."
     },
-    pillars: [
-      {
-        title: "Dewan Syariah",
-        description: "Sang penjaga otentisitas, memastikan setiap kisah dan riwayat berjalan dalam naungan syariat",
-        members: ["Ustadz Nizar"],
-        icon: Crown,
-        color: "emerald"
-      },
-      {
-        title: "Tim Penulis Konten", 
-        description: "Yang dengan pena mereka merangkai sirah menjadi kisah yang dapat dipelajari dengan mudah",
-        members: ["Mbak Ratih", "Mbak Ella", "Mbak Ifa", "Mbak Veni", "Mbak Rini", "Mbak Ratna", "Mbak Dee"],
-        icon: Users,
-        color: "blue"
-      },
-      {
-        title: "Tim Editor",
-        description: "Sang penyaring bahasa, yang menjaga narasi agar tetap jernih, indah, dan berwibawa",
-        members: ["Pak Yudho"],
-        icon: Heart,
-        color: "purple"
-      }
-    ],
+    pillars: [{
+      title: "Dewan Syariah",
+      description: "Sang penjaga otentisitas, memastikan setiap kisah dan riwayat berjalan dalam naungan syariat",
+      members: ["Ustadz Nizar"],
+      icon: Crown,
+      color: "emerald"
+    }, {
+      title: "Tim Penulis Konten",
+      description: "Yang dengan pena mereka merangkai sirah menjadi kisah yang dapat dipelajari dengan mudah",
+      members: ["Mbak Ratih", "Mbak Ella", "Mbak Ifa", "Mbak Veni", "Mbak Rini", "Mbak Ratna", "Mbak Dee"],
+      icon: Users,
+      color: "blue"
+    }, {
+      title: "Tim Editor",
+      description: "Sang penyaring bahasa, yang menjaga narasi agar tetap jernih, indah, dan berwibawa",
+      members: ["Pak Yudho"],
+      icon: Heart,
+      color: "purple"
+    }],
     vision: "Visi kami adalah menghidupkan kembali warisan Islam sebagai cahaya yang menuntun langkah generasi kini dan nanti."
   };
-
   const getColorClasses = (color: string) => {
     const colorMap = {
       emerald: "from-emerald-500/10 to-emerald-600/5 border-emerald-500/20 text-emerald-600",
-      blue: "from-blue-500/10 to-blue-600/5 border-blue-500/20 text-blue-600", 
+      blue: "from-blue-500/10 to-blue-600/5 border-blue-500/20 text-blue-600",
       purple: "from-purple-500/10 to-purple-600/5 border-purple-500/20 text-purple-600"
     };
     return colorMap[color as keyof typeof colorMap] || "from-primary/10 to-primary/5 border-primary/20 text-primary";
   };
-
-  return (
-    <div className="min-h-screen bg-background text-foreground pb-20">
+  return <div className="min-h-screen bg-background text-foreground pb-20">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="p-6">
           <h1 className="text-3xl font-bold text-center bg-gradient-primary bg-clip-text text-transparent">
             Tim Kami
           </h1>
-          <p className="text-center text-muted-foreground mt-2">
-            Orang-orang di balik Daftar Selerang
-          </p>
+          
         </div>
       </div>
 
@@ -84,14 +74,9 @@ const AboutTeam = () => {
         {/* Team Pillars */}
         <div className="space-y-6">
           {teamData.pillars.map((pillar, index) => {
-            const IconComponent = pillar.icon;
-            const colorClasses = getColorClasses(pillar.color);
-            
-            return (
-              <Card 
-                key={pillar.title}
-                className={`bg-gradient-to-r ${colorClasses} border`}
-              >
+          const IconComponent = pillar.icon;
+          const colorClasses = getColorClasses(pillar.color);
+          return <Card key={pillar.title} className={`bg-gradient-to-r ${colorClasses} border`}>
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className={`p-3 rounded-xl bg-gradient-to-r ${colorClasses.split(' ')[0]} ${colorClasses.split(' ')[1]}`}>
@@ -110,23 +95,16 @@ const AboutTeam = () => {
                       <div className="space-y-2">
                         <h4 className="font-semibold text-foreground">Anggota Tim:</h4>
                         <div className="flex flex-wrap gap-2">
-                          {pillar.members.map((member, memberIndex) => (
-                            <Badge 
-                              key={memberIndex}
-                              variant="outline"
-                              className={`${colorClasses.split(' ')[2]} ${colorClasses.split(' ')[3]} bg-background/50`}
-                            >
+                          {pillar.members.map((member, memberIndex) => <Badge key={memberIndex} variant="outline" className={`${colorClasses.split(' ')[2]} ${colorClasses.split(' ')[3]} bg-background/50`}>
                               {member}
-                            </Badge>
-                          ))}
+                            </Badge>)}
                         </div>
                       </div>
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
 
         {/* Vision */}
@@ -145,8 +123,6 @@ const AboutTeam = () => {
       </div>
 
       <BottomNavigation />
-    </div>
-  );
+    </div>;
 };
-
 export default AboutTeam;
