@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import HijriyahCarousel from "@/components/HijriyahCarousel";
 import EventDetail from "@/components/EventDetail";
 import BottomNavigation from "@/components/BottomNavigation";
@@ -6,6 +7,8 @@ import BottomNavigation from "@/components/BottomNavigation";
 const Timeline = () => {
   const [eventDetailOpen, setEventDetailOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const location = useLocation();
+  const initialSelectedYear = location.state?.selectedYear;
 
   const handleEventClick = (event: any) => {
     setSelectedEvent(event);
@@ -28,7 +31,7 @@ const Timeline = () => {
 
       {/* Main Content - Using HijriyahCarousel Component */}
       <div className="pb-20">
-        <HijriyahCarousel onEventClick={handleEventClick} />
+        <HijriyahCarousel onEventClick={handleEventClick} initialSelectedYear={initialSelectedYear} />
       </div>
 
       {/* Event Detail Modal */}

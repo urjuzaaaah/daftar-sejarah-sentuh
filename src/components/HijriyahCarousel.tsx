@@ -1,16 +1,19 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, ChevronLeft, Moon, Swords, Heart, Users } from "lucide-react";
 
 interface HijriyahCarouselProps {
   onEventClick?: (event: any) => void;
+  initialSelectedYear?: string;
 }
 
-const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
-  const [selectedYear, setSelectedYear] = useState("Sebelum Hijriyah");
+const HijriyahCarousel = ({ onEventClick, initialSelectedYear }: HijriyahCarouselProps) => {
+  const [selectedYear, setSelectedYear] = useState(initialSelectedYear || "Sebelum Hijriyah");
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   
   const hijriYears = [
     { year: "Sebelum Hijriyah", events: 8 },
@@ -208,7 +211,10 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
         )}
       </div>
 
-      <Button className="w-full mt-4 bg-gradient-to-r from-primary to-accent hover:from-primary-glow hover:to-accent border-2 border-primary/30 shimmer">
+      <Button 
+        className="w-full mt-4 bg-gradient-to-r from-primary to-accent hover:from-primary-glow hover:to-accent border-2 border-primary/30 shimmer"
+        onClick={() => navigate('/timeline', { state: { selectedYear } })}
+      >
         Lihat Selengkapnya
         <ChevronRight className="ml-2 h-4 w-4" />
       </Button>
