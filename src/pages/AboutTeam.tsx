@@ -31,9 +31,9 @@ const AboutTeam = () => {
   };
   const getColorClasses = (color: string) => {
     const colorMap = {
-      emerald: "from-emerald-500/10 to-emerald-600/5 border-emerald-500/20 text-emerald-600",
-      blue: "from-blue-500/10 to-blue-600/5 border-blue-500/20 text-blue-600",
-      purple: "from-purple-500/10 to-purple-600/5 border-purple-500/20 text-purple-600"
+      emerald: "from-primary/10 to-primary/5 border-primary/20 text-primary",
+      blue: "from-secondary/10 to-secondary/5 border-secondary/20 text-secondary-foreground",
+      purple: "from-accent/10 to-accent/5 border-accent/20 text-accent-foreground"
     };
     return colorMap[color as keyof typeof colorMap] || "from-primary/10 to-primary/5 border-primary/20 text-primary";
   };
@@ -108,12 +108,12 @@ const AboutTeam = () => {
         </div>
 
         {/* Vision */}
-        <Card className="border-yellow-500/20 bg-gradient-to-r from-yellow-500/5 to-orange-500/5">
+        <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-accent/5">
           <CardContent className="p-8 text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Star className="h-6 w-6 text-yellow-500" />
+              <Star className="h-6 w-6 text-primary" />
               <h3 className="text-2xl font-bold text-foreground">Visi Kami</h3>
-              <Star className="h-6 w-6 text-yellow-500" />
+              <Star className="h-6 w-6 text-primary" />
             </div>
             <p className="text-lg text-muted-foreground leading-relaxed">
               {teamData.vision}
