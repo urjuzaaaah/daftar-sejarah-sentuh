@@ -179,7 +179,7 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
 
       {/* Events List */}
       <div className="space-y-3">
-        {events[selectedYear as keyof typeof events]?.map((event, index) => (
+        {events[selectedYear as keyof typeof events]?.slice(0, 3).map((event, index) => (
           <Card 
             key={index} 
             className="p-4 bg-card hover:bg-secondary transition-all duration-300 glow-gold cursor-pointer"
@@ -199,6 +199,13 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
             </div>
           </Card>
         ))}
+        {events[selectedYear as keyof typeof events]?.length > 3 && (
+          <div className="text-center pt-2">
+            <p className="text-sm text-muted-foreground">
+              +{events[selectedYear as keyof typeof events].length - 3} peristiwa lainnya
+            </p>
+          </div>
+        )}
       </div>
 
       <Button className="w-full mt-4 bg-gradient-to-r from-primary to-accent hover:from-primary-glow hover:to-accent border-2 border-primary/30 shimmer">
