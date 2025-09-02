@@ -119,7 +119,7 @@ const HijriyahCarousel = ({ onEventClick }: HijriyahCarouselProps) => {
     <div className="px-4 mb-8">
       <div className="mb-6">
         <h2 className="font-elegant text-xl font-bold text-gradient-gold mb-2 flex items-center gap-2">
-          📍 Lampau Ke Tahun Tertentu Dalam Sejarah Islam
+          📍 Lompat Ke Tahun Tertentu Dalam Sejarah Islam
         </h2>
         <div className="w-16 h-1 bg-primary rounded-full"></div>
       </div>
