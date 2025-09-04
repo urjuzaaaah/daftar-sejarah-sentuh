@@ -31,7 +31,12 @@ const Timeline = () => {
 
       {/* Main Content - Using HijriyahCarousel Component */}
       <div className="pb-20">
-        <HijriyahCarousel onEventClick={handleEventClick} initialSelectedYear={initialSelectedYear} />
+        <HijriyahCarousel 
+          onEventClick={handleEventClick} 
+          initialSelectedYear={initialSelectedYear}
+          showAllEvents={true}
+          showMoreButton={false}
+        />
       </div>
 
       {/* Event Detail Modal */}

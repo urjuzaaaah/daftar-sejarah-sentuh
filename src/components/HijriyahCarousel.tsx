@@ -7,9 +7,11 @@ import { ChevronRight, ChevronLeft, Moon, Swords, Heart, Users } from "lucide-re
 interface HijriyahCarouselProps {
   onEventClick?: (event: any) => void;
   initialSelectedYear?: string;
+  showAllEvents?: boolean;
+  showMoreButton?: boolean;
 }
 
-const HijriyahCarousel = ({ onEventClick, initialSelectedYear }: HijriyahCarouselProps) => {
+const HijriyahCarousel = ({ onEventClick, initialSelectedYear, showAllEvents = false, showMoreButton = true }: HijriyahCarouselProps) => {
   const [selectedYear, setSelectedYear] = useState(initialSelectedYear || "Sebelum Hijriyah");
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -182,7 +184,9 @@ const HijriyahCarousel = ({ onEventClick, initialSelectedYear }: HijriyahCarouse
 
       {/* Events List */}
       <div className="space-y-3">
-        {events[selectedYear as keyof typeof events]?.slice(0, 3).map((event, index) => (
+        {events[selectedYear as keyof typeof events]
+          ?.slice(0, showAllEvents ? undefined : 3)
+          .map((event, index) => (
           <Card 
             key={index} 
             className="p-4 bg-card hover:bg-secondary transition-all duration-300 glow-gold cursor-pointer"
@@ -202,7 +206,7 @@ const HijriyahCarousel = ({ onEventClick, initialSelectedYear }: HijriyahCarouse
             </div>
           </Card>
         ))}
-        {events[selectedYear as keyof typeof events]?.length > 3 && (
+        {!showAllEvents && events[selectedYear as keyof typeof events]?.length > 3 && (
           <div className="text-center pt-2">
             <p className="text-sm text-muted-foreground">
               +{events[selectedYear as keyof typeof events].length - 3} peristiwa lainnya
@@ -211,13 +215,15 @@ const HijriyahCarousel = ({ onEventClick, initialSelectedYear }: HijriyahCarouse
         )}
       </div>
 
-      <Button 
-        className="w-full mt-4 bg-gradient-to-r from-primary to-accent hover:from-primary-glow hover:to-accent border-2 border-primary/30 shimmer"
-        onClick={() => navigate('/timeline', { state: { selectedYear } })}
-      >
-        Lihat Selengkapnya
-        <ChevronRight className="ml-2 h-4 w-4" />
-      </Button>
+      {showMoreButton && (
+        <Button 
+          className="w-full mt-4 bg-gradient-to-r from-primary to-accent hover:from-primary-glow hover:to-accent border-2 border-primary/30 shimmer"
+          onClick={() => navigate('/timeline', { state: { selectedYear } })}
+        >
+          Lihat Selengkapnya
+          <ChevronRight className="ml-2 h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 };
