@@ -269,10 +269,10 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
           </Card>
 
           {/* Fun Facts */}
-          <Card className="card-hover animate-fade-in bg-gradient-to-r from-yellow-500/5 to-orange-500/5 border-yellow-500/20" style={{ animationDelay: "0.4s" }}>
+          <Card className="card-hover animate-fade-in bg-gradient-to-r from-secondary/10 to-accent/10 border-secondary/20" style={{ animationDelay: "0.4s" }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Lightbulb className="h-5 w-5 text-yellow-500 animate-pulse-gentle" />
+                <Lightbulb className="h-5 w-5 text-secondary animate-pulse-gentle" />
                 <h2 className="text-xl font-semibold">Tahukah Kamu?</h2>
               </div>
               <div className="space-y-3">
@@ -282,7 +282,7 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
                     className="flex items-start gap-3 animate-fade-in"
                     style={{ animationDelay: `${0.5 + index * 0.2}s` }}
                   >
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 animate-pulse" />
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 animate-pulse" />
                     <p className="text-muted-foreground">{fact}</p>
                   </div>
                 ))}
@@ -291,10 +291,10 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
           </Card>
 
           {/* Strategies */}
-          <Card className="card-hover animate-fade-in bg-gradient-to-r from-blue-500/5 to-purple-500/5 border-blue-500/20" style={{ animationDelay: "0.5s" }}>
+          <Card className="card-hover animate-fade-in bg-gradient-to-r from-primary/5 to-accent/10 border-primary/20" style={{ animationDelay: "0.5s" }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Target className="h-5 w-5 text-blue-500 animate-pulse-gentle" />
+                <Target className="h-5 w-5 text-primary animate-pulse-gentle" />
                 <h2 className="text-xl font-semibold">Strategi Utama</h2>
               </div>
               <div className="space-y-3">
@@ -304,7 +304,7 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
                     className="flex items-start gap-3 animate-fade-in"
                     style={{ animationDelay: `${0.6 + index * 0.2}s` }}
                   >
-                    <div className="w-6 h-6 bg-blue-500/20 border border-blue-500/30 rounded-full flex items-center justify-center text-blue-500 text-sm font-bold animate-scale-in">
+                    <div className="w-6 h-6 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center text-primary text-sm font-bold animate-scale-in">
                       {index + 1}
                     </div>
                     <p className="text-muted-foreground">{strategy}</p>
@@ -341,15 +341,15 @@ const EventDetail = ({ isOpen, onClose, event }: EventDetailProps) => {
           </Card>
 
           {/* Share Button */}
-          <Card className="card-hover animate-fade-in bg-gradient-to-r from-green-500/5 to-emerald-500/5 border-green-500/20" style={{ animationDelay: "0.7s" }}>
+          <Card className="card-hover animate-fade-in bg-gradient-to-r from-accent/10 to-primary/5 border-accent/20" style={{ animationDelay: "0.7s" }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Share2 className="h-5 w-5 text-green-500 animate-pulse-gentle" />
+                <Share2 className="h-5 w-5 text-accent animate-pulse-gentle" />
                 <h2 className="text-xl font-semibold">Bagikan</h2>
               </div>
               <Button 
                 onClick={handleShare}
-                className={`w-full bg-green-600 hover:bg-green-700 text-white transition-all duration-300 ${
+                className={`w-full bg-accent hover:bg-accent/80 text-accent-foreground transition-all duration-300 ${
                   isSharing ? "animate-bounce" : "animate-scale-in"
                 }`}
                 disabled={isSharing}
