@@ -19,7 +19,7 @@ const Timeline = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20 py-8 px-4">
-        <div className="text-center">
+        <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Timeline Kehidupan Rasulullah ﷺ
           </h1>
@@ -30,7 +30,7 @@ const Timeline = () => {
       </div>
 
       {/* Main Content - Using HijriyahCarousel Component */}
-      <div className="pb-20">
+      <div className="pb-20 max-w-6xl mx-auto">
         <HijriyahCarousel 
           onEventClick={handleEventClick} 
           initialSelectedYear={initialSelectedYear}

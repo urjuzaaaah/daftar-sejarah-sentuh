@@ -20,13 +20,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <HeroSection />
+      <div className="w-full">
+        <HeroSection />
+      </div>
       
       {/* Search Bar */}
-      <SearchBar />
+      <div className="max-w-6xl mx-auto">
+        <SearchBar />
+      </div>
       
       {/* Main Content */}
-      <div className="pb-20"> {/* Bottom padding for navigation */}
+      <div className="pb-20 max-w-6xl mx-auto"> {/* Bottom padding for navigation */}
         {/* Hijriyah Years Section */}
         <HijriyahCarousel onEventClick={handleEventClick} />
         
