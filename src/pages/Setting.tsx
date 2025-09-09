@@ -210,7 +210,7 @@ const Setting = () => {
                       </div>
                       <div className="flex-1 text-left">
                         <div className="font-medium">{item.label}</div>
-                        <div className="text-sm text-muted-foreground">{item.description}</div>
+                        <div className="text-sm text-muted-foreground break-words">{item.description}</div>
                       </div>
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     </div>
