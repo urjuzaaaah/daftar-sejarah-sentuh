@@ -105,14 +105,14 @@ const Setting = () => {
     action: () => console.log("Clear cache"),
     dangerous: true
   }];
-  return <div className="min-h-screen bg-background text-foreground pb-20">
+  return <div className="min-h-screen bg-background text-foreground pb-20 px-4 sm:px-6 max-w-4xl mx-auto">{/* Responsive container */}
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="p-6">
-          <h1 className="text-3xl font-bold text-center bg-gradient-primary bg-clip-text text-transparent animate-fade-in">
+        <div className="py-4 px-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center bg-gradient-primary bg-clip-text text-transparent animate-fade-in">
             Pengaturan
           </h1>
-          <p className="text-center text-muted-foreground mt-2 animate-fade-in" style={{
+          <p className="text-center text-muted-foreground mt-2 animate-fade-in text-sm px-2" style={{
           animationDelay: "0.2s"
         }}>
             Sesuaikan aplikasi dengan preferensi Anda
@@ -121,7 +121,7 @@ const Setting = () => {
       </div>
 
       {/* App Info */}
-      <div className="p-6">
+      <div className="py-4">{/* Reduced padding for mobile */}
         <Card className="animate-fade-in border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
           <CardContent className="p-6">
             <div className="text-center space-y-4">
@@ -148,7 +148,7 @@ const Setting = () => {
       </div>
 
       {/* Settings Groups */}
-      <div className="px-6 space-y-6">
+      <div className="space-y-4">{/* Reduced spacing for mobile */}
         {settingGroups.map((group, groupIndex) => {
         const GroupIcon = group.icon;
         return <Card key={group.title} className="animate-fade-in" style={{
@@ -167,13 +167,13 @@ const Setting = () => {
               const IconComponent = settings[item.key as keyof typeof settings] && item.altIcon ? item.altIcon : item.icon;
               return <div key={item.key} className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3 flex-1">
-                          <div className="p-2 rounded-lg bg-secondary/50">
+                        <div className="flex items-center gap-3 flex-1 min-w-0">{/* Added min-w-0 for flex shrinking */}
+                          <div className="p-2 rounded-lg bg-secondary/50 flex-shrink-0">{/* Prevent icon from shrinking */}
                             <IconComponent className="h-4 w-4 text-muted-foreground" />
                           </div>
-                          <div className="flex-1">
-                            <div className="font-medium">{item.label}</div>
-                            <div className="text-sm text-muted-foreground">{item.description}</div>
+                          <div className="flex-1 min-w-0">{/* Added min-w-0 for text wrapping */}
+                            <div className="font-medium text-sm">{item.label}</div>
+                            <div className="text-xs text-muted-foreground break-words leading-relaxed">{item.description}</div>
                           </div>
                         </div>
                         <Switch checked={settings[item.key as keyof typeof settings] as boolean} onCheckedChange={() => handleSettingChange(item.key)} className="hover:animate-wiggle" />
@@ -187,7 +187,7 @@ const Setting = () => {
       </div>
 
       {/* Action Items */}
-      <div className="px-6 mt-6">
+      <div className="mt-4">{/* Reduced margin for mobile */}
         <Card className="animate-fade-in" style={{
         animationDelay: "0.4s"
       }}>
@@ -203,16 +203,16 @@ const Setting = () => {
             {actionItems.map((item, index) => {
             const IconComponent = item.icon;
             return <div key={item.label} className="space-y-3">
-                  <Button variant="ghost" className={`w-full justify-start h-auto p-4 button-magnetic ${item.dangerous ? 'hover:bg-destructive/10 hover:text-destructive' : ''}`} onClick={item.action}>
-                    <div className="flex items-center gap-3 flex-1">
-                      <div className={`p-2 rounded-lg ${item.dangerous ? 'bg-destructive/10' : 'bg-secondary/50'}`}>
+                  <Button variant="ghost" className={`w-full justify-start h-auto p-3 button-magnetic ${item.dangerous ? 'hover:bg-destructive/10 hover:text-destructive' : ''}`} onClick={item.action}>{/* Reduced padding for mobile */}
+                    <div className="flex items-center gap-3 flex-1 min-w-0">{/* Added min-w-0 for flex shrinking */}
+                      <div className={`p-2 rounded-lg flex-shrink-0 ${item.dangerous ? 'bg-destructive/10' : 'bg-secondary/50'}`}>{/* Prevent icon from shrinking */}
                         <IconComponent className={`h-4 w-4 ${item.dangerous ? 'text-destructive' : 'text-muted-foreground'}`} />
                       </div>
-                      <div className="flex-1 text-left">
-                        <div className="font-medium">{item.label}</div>
-                        <div className="text-sm text-muted-foreground break-words">{item.description}</div>
+                      <div className="flex-1 text-left min-w-0">{/* Added min-w-0 for text wrapping */}
+                        <div className="font-medium text-sm">{item.label}</div>
+                        <div className="text-xs text-muted-foreground break-words leading-relaxed">{item.description}</div>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                      <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />{/* Prevent chevron from shrinking */}
                     </div>
                   </Button>
                   {index < actionItems.length - 1 && <Separator />}
@@ -223,7 +223,7 @@ const Setting = () => {
       </div>
 
       {/* Footer */}
-      <div className="px-6 py-6">
+      <div className="py-4">{/* Reduced padding for mobile */}
         <div className="text-center text-sm text-muted-foreground space-y-2 animate-fade-in" style={{
         animationDelay: "0.6s"
       }}>
